@@ -12,16 +12,22 @@
 };
 
 / {
+
+    chosen {
+        zephyr,display = &ssd1306;
+    };
+
     left_encoder: encoder_left {
         compatible = "alps,ec11";
-        a-gpios = <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        b-gpios = <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        a-gpios = <PIN_A (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        b-gpios = <PIN_B (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         steps = <80>;
+        status = "disabled";
     };
 
     sensors: sensors {
         compatible = "zmk,keymap-sensors";
-        sensors = <&left_encoder>;
+        sensors = <&left_encoder &right_encoder>;
         triggers-per-rotation = <20>;
     };
 };
@@ -39,4 +45,8 @@
         multiplex-ratio = <63>;
         prechargep = <0x22>;
     };
+};
+
+&left_encoder {
+    status = "okay";
 };
