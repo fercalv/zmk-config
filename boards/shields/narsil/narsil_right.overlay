@@ -36,18 +36,12 @@
 
 &pro_micro_i2c {
     status = "okay";
-    clock-frequency = <100000>;
-    sh1106: sh1106@3c {
-        compatible = "sinowealth,sh1106";
+    ssd1306: ssd1306@3c {
+        compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
         width = <128>;
         height = <64>;
-        segment-offset = <2>;
-        page-offset = <0>;
-        display-offset = <0>;
         multiplex-ratio = <63>;
-        segment-remap;
-        com-invdir;
-        prechargep = <0x22>;
+        status = "okay";
     };
 };
