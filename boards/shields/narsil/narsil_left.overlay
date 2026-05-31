@@ -50,3 +50,7 @@
 &left_encoder {
     status = "okay";
 };
+
+&ssd1306 {
+    status = "okay";
+};
