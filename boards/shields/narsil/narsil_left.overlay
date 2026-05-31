@@ -12,6 +12,61 @@
 };
 
 / {
+    chosen {
+        zephyr,display = &sh1106;  /* <-- CORRECCIÓN 1: Puntero actualizado */
+    };
+
+    left_encoder: encoder_left {
+        compatible = "alps,ec11";
+        a-gpios = <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        b-gpios = <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        steps = <80>;
+        status = "okay";
+    };
+
+    sensors: sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&left_encoder>;
+        triggers-per-rotation = <20>;
+    };
+};
+
+/* <-- CORRECCIÓN 2: Forzar resistencias Pull-Up internas para estabilizar el I2C */
+&i2c0_default {
+    group1 {
+        bias-pull-up; 
+    };
+};
+
+&pro_micro_i2c {
+    status = "okay";
+    sh1106: sh1106@3c {            /* <-- CORRECCIÓN 3: Nombre de nodo corregido */
+        compatible = "sinowealth,sh1106";
+        reg = <0x3c>;
+        width = <128>;
+        height = <64>;
+        segment-offset = <2>;      /* <-- CORRECCIÓN 4: Vital para quitar la nieve en el SH1106 */
+        page-offset = <0>;
+        display-offset = <0>;
+        multiplex-ratio = <63>;
+        segment-remap;
+        com-invdir;
+        prechargep = <0x22>;
+    };
+};// narsil_left.overlay - Lado izquierdo
+#include "narsil.dtsi"
+
+&kscan {
+    col-gpios
+        = <&pro_micro 15 GPIO_ACTIVE_HIGH>   // col0
+        , <&pro_micro 18 GPIO_ACTIVE_HIGH>   // col1
+        , <&pro_micro 19 GPIO_ACTIVE_HIGH>   // col2
+        , <&pro_micro 20 GPIO_ACTIVE_HIGH>   // col3
+        , <&pro_micro 21 GPIO_ACTIVE_HIGH>   // col4
+        ;
+};
+
+/ {
 
     chosen {
         zephyr,display = &ssd1306;
