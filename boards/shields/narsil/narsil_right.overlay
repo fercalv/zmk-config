@@ -84,6 +84,7 @@
         width = <128>;
         height = <64>;
         display-offset = <0>;      // Cambia de page-offset a display-offset
+        page-offset = <0>;  
         multiplex-ratio = <63>;
         segment-offset = <0>;
         status = "okay";
