@@ -34,18 +34,19 @@
         triggers-per-rotation = <20>;
     };
 };
-
-&i2c0 {
+&pro_micro_i2c {
     status = "okay";
     ssd1306: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
         width = <128>;
-        height = <64>;
+        height = <64>;           /* Tu resolución real */
         segment-offset = <0>;
         page-offset = <0>;
         display-offset = <0>;
-        multiplex-ratio = <63>;
+        multiplex-ratio = <63>;  /* Tu ratio real */
+        segment-remap;           /* Gira el eje X (quita el ruido) */
+        com-invdir;              /* Gira el eje Y (quita el ruido) */
         prechargep = <0x22>;
     };
 };
