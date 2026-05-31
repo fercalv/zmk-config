@@ -1,4 +1,3 @@
-// narsil_right.overlay - Lado derecho
 #include "narsil.dtsi"
 
 &default_transform {
@@ -6,18 +5,12 @@
 };
 
 &kscan {
-    col-gpios
-        = <&pro_micro 15 GPIO_ACTIVE_HIGH>   // col0
-        , <&pro_micro 18 GPIO_ACTIVE_HIGH>   // col1
-        , <&pro_micro 19 GPIO_ACTIVE_HIGH>   // col2
-        , <&pro_micro 20 GPIO_ACTIVE_HIGH>   // col3
-        , <&pro_micro 21 GPIO_ACTIVE_HIGH>   // col4
-        ;
+    col-gpios = <&pro_micro 15 GPIO_ACTIVE_HIGH>, <&pro_micro 18 GPIO_ACTIVE_HIGH>, <&pro_micro 19 GPIO_ACTIVE_HIGH>, <&pro_micro 20 GPIO_ACTIVE_HIGH>, <&pro_micro 21 GPIO_ACTIVE_HIGH>;
 };
 
 / {
     chosen {
-        zephyr,display = &sh1106;  /* <-- CORRECCIÓN 1 */
+        zephyr,display = &sh1106;
     };
     
     right_encoder: encoder_right {
@@ -35,21 +28,21 @@
     };
 };
 
-/* <-- CORRECCIÓN 2: Resistencias internas */
 &i2c0_default {
     group1 {
-        bias-pull-up; 
+        bias-pull-up;
     };
 };
 
 &pro_micro_i2c {
     status = "okay";
-    sh1106: sh1106@3c {            /* <-- CORRECCIÓN 3 */
+    clock-frequency = <100000>;
+    sh1106: sh1106@3c {
         compatible = "sinowealth,sh1106";
         reg = <0x3c>;
         width = <128>;
         height = <64>;
-        segment-offset = <2>;      /* <-- CORRECCIÓN 4: Vital para quitar el ruido */
+        segment-offset = <2>;
         page-offset = <0>;
         display-offset = <0>;
         multiplex-ratio = <63>;
