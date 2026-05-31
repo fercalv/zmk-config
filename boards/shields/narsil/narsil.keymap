@@ -30,7 +30,7 @@
 
                                 &kp ESC     &kp LSFT    &lt SYM SPC  &kp RET     &mo NAV     &kp BSPC
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         // Capa 1: Numeros y simbolos
@@ -42,7 +42,7 @@
 
                                 &trans      &trans      &trans       &trans      &trans      &trans
             >;
-            sensor-bindings = <&inc_dec_kp C_BRI_UP C_BRI_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&inc_dec_kp C_BRI_UP C_BRI_DN>;
         };
 
         // Capa 2: Navegacion, F-keys y simbolos de programacion
@@ -54,7 +54,7 @@
 
                                 &trans      &trans      &trans       &trans      &trans      &trans
             >;
-            sensor-bindings = <&inc_dec_kp C_BRI_UP C_BRI_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&inc_dec_kp C_BRI_UP C_BRI_DN>;
         };
     };
 };
