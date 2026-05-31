@@ -88,5 +88,6 @@
         multiplex-ratio = <63>;
         segment-offset = <0>;
         status = "okay";
+        prechargep = <0x22>;
     };
 };
