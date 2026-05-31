@@ -11,7 +11,7 @@
 
 / {
     chosen {
-        zephyr,display = &sh1106;
+        zephyr,display = &display0;
     };
     
     right_encoder: encoder_right {
