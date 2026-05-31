@@ -15,13 +15,11 @@
         ;
 };
 
-/ 
-
+/ {
     chosen {
         zephyr,display = &ssd1306;
     };
     
-    {
     right_encoder: encoder_right {
         compatible = "alps,ec11";
         a-gpios = <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
