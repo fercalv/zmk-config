@@ -1,4 +1,46 @@
+// narsil_right.overlay
 #include "narsil.dtsi"
+
+&default_transform {
+    col-offset = <5>;
+};
+
+&kscan {
+    col-gpios = <&pro_micro 15 GPIO_ACTIVE_HIGH>, <&pro_micro 18 GPIO_ACTIVE_HIGH>, <&pro_micro 19 GPIO_ACTIVE_HIGH>, <&pro_micro 20 GPIO_ACTIVE_HIGH>, <&pro_micro 21 GPIO_ACTIVE_HIGH>;
+};
+
+/ {
+    chosen {
+        zephyr,display = &display0;
+    };
+    
+    right_encoder: encoder_right {
+        compatible = "alps,ec11";
+        a-gpios = <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        b-gpios = <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        steps = <80>;
+        status = "okay";
+    };
+
+    sensors: sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&right_encoder>;
+        triggers-per-rotation = <20>;
+    };
+};
+
+&pro_micro_i2c {
+    status = "okay";
+    clock-frequency = <100000>;
+    display0: ssd1306@3c {
+        compatible = "solomon,ssd1306fb";
+        reg = <0x3c>;
+        width = <128>;
+        height = <64>;
+        multiplex-ratio = <63>;
+        status = "okay";
+    };
+};#include "narsil.dtsi"
 
 &default_transform {
     col-offset = <5>;
