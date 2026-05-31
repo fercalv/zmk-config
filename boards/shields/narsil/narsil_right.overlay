@@ -17,7 +17,7 @@
 
 / {
     chosen {
-        zephyr,display = &ssd1306;
+        zephyr,display = &sh1106;  /* <-- CORRECCIÓN 1 */
     };
     
     right_encoder: encoder_right {
@@ -34,19 +34,27 @@
         triggers-per-rotation = <20>;
     };
 };
+
+/* <-- CORRECCIÓN 2: Resistencias internas */
+&i2c0_default {
+    group1 {
+        bias-pull-up; 
+    };
+};
+
 &pro_micro_i2c {
     status = "okay";
-    ssd1306: ssd1306@3c {
+    sh1106: sh1106@3c {            /* <-- CORRECCIÓN 3 */
         compatible = "sinowealth,sh1106";
         reg = <0x3c>;
         width = <128>;
-        height = <64>;           /* Tu resolución real */
-        segment-offset = <0>;
+        height = <64>;
+        segment-offset = <2>;      /* <-- CORRECCIÓN 4: Vital para quitar el ruido */
         page-offset = <0>;
         display-offset = <0>;
-        multiplex-ratio = <63>;  /* Tu ratio real */
-        segment-remap;           /* Gira el eje X (quita el ruido) */
-        com-invdir;              /* Gira el eje Y (quita el ruido) */
+        multiplex-ratio = <63>;
+        segment-remap;
+        com-invdir;
         prechargep = <0x22>;
     };
 };
